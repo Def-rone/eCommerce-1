@@ -12,7 +12,6 @@
 	}
 ?>
 <head>
-<title>Your Page Title</title>
 <meta http-equiv="REFRESH" content="0;url=http://<?php echo $_REQUEST['url'] ?>"></HEAD>
 <body>
 </body>
