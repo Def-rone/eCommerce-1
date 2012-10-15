@@ -12,7 +12,6 @@ mysql_select_db('my_db') or die('Could not select database');
 // some code
 //mysql_close($dblink);
 ?>
-
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">

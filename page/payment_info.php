@@ -9,9 +9,14 @@
             }
             
         </script>
+        <link rel="stylesheet" href="./ecommerce.css" type="text/css">
     </head>
     <body>
-        <div style="">
+        <div id="body_div">
+        <div id="head">
+            <a href="items.php"><img src="logo.jpg" ></a>
+        </div>
+        <div id="main">
         <div id="payment_form">
             <fieldset>
                 <form name="" action="./checkout.php" method="post">
@@ -203,12 +208,13 @@
                     $totalPrice += $val['price'];
                     $index++;
                 }
-                echo "<tr><td colspan='3'>Total Price : $totalPrice</td></tr>";
-                echo "<tr><td colspan='3'><a href='javascript:order();'>Place Order</a></td></tr>";
+                echo "<tr><td colspan='4'>Total Price : $totalPrice</td></tr>";
+                echo "<tr><td colspan='4' aligh='right'><span class='but'><a href='javascript:order();'>Place Order</a></span></td></tr>";
             }
             ?>
             </table>
         </div>
+        </div> 
         </div>
     </body>
 </html>

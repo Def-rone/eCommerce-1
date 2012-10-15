@@ -45,7 +45,7 @@ mysql_close($dblink);
         
         <form action="items.php" method="get">
             Search:
-            <input type="text" name ="Searchcontent" value=<?=$_GET['Searchcontent']?>>
+            <input type="text" name ="Searchcontent" value=<?php $_GET['Searchcontent']?>>
 
             sort by price:
             <select name='sort'>

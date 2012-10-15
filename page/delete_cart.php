@@ -2,12 +2,12 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
 <html>
 <?php
-	if(!isset($_REQUEST['item'])){ 
+	if(!isset($_REQUEST['inventory_id'])){ 
 		echo "error: null value in the request";
 		#TODO : return back to the previous page
 	}else{
-		$item = $_REQUEST['item'];
-		unset($_SESSION['cart'][$item]);
+		$inventory_id = $_REQUEST['inventory_id'];
+		unset($_SESSION['cart'][$inventory_id]);
 	}
 ?>
 <head>
