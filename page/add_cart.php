@@ -27,6 +27,7 @@ ini_set('display_errors', 'On');
 	if(isset($_REQUEST['url'])) {
 ?>
 <head>
+<title>Your Page Title</title>
 <meta http-equiv="REFRESH" content="0;url=http://<?php echo $_REQUEST['url'] ?>">
 </head>
 <?php
