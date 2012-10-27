@@ -12,8 +12,6 @@ $query1 = mysql_fetch_array($sql);
 //$num2 = mysql_num_rows($sql);
 //$query2 = mysql_fetch_array($sql);
 ?>
-
-
 <html>
 <head>
 <title>This is Save Checkout page.</title>
