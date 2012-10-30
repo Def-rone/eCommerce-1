@@ -9,6 +9,9 @@ fieldset legend {
     color: brown;
 }
 
-text {
-    width: 100;
+
+input {
+    outline: none;
+    outline-width: 0px;
 }
+

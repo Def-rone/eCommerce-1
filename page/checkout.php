@@ -4,7 +4,31 @@
 # Takes in items, payment, and shipping information, and create order table.
 # is it coming from session ?
 
-$$_REQUEST[''];
+$_REQUEST['credit_card_id'];
+$_REQUESt['credit_card-number'];
+
+
+//payment information
+$credit_card_number;
+$expiration_date;
+$holder_name;
+$cvs;
+$billing_address1;
+$billing_address2;
+$billing_state;
+$billing_city;
+$billing_zipcode;
+
+
+//shipping information
+$recipient_name;
+$recipient_address1;
+$recipient_address2;
+$recipient_state;
+$recipient_city;
+$recipient_zipcode;
+
+
 
 # the credit card has been compromised - check the Credit Card Hot List
 
