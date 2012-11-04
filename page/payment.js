@@ -220,7 +220,7 @@ function createForm(){
                                 '</li>' +
                                 '<li>' +
                                     '<label>CVC</label>' +
-                                    '<input type="text" name="cvc" maxlength="4" onkeyup="javascript:verifyInput(this); return false;"/>' +
+                                    '<input type="text" name="cvs" maxlength="4" onkeyup="javascript:verifyInput(this); return false;"/>' +
                                 '</li>';
         olObj2['style']['list-style'] = 'none';
         olObj2.innerHTML = '<legend style="font-weight: bold">Billing Information</legend>' +
@@ -325,6 +325,7 @@ function createForm(){
     formObj.innerHTML = '<ol style="list-style: none">' +
                             '<legend style="font-weight: bold">Card Information</legend>' +
                                 '<li><label>Card Number</label>' +
+                                    '<input type="hidden" name="credit_card_id" value="'+ credit_card_id + '"/>' +
                                     '<input type="text" name="credit_card_number" value="'+ credit_card_number + '" disabled/>' +
                                 '</li>' +
                                 '<li>' +
@@ -333,7 +334,7 @@ function createForm(){
                                 '</li>' +
                                 '<li>' +
                                     '<label>CVC</label>' +
-                                    '<input type="text" name="cvc" maxlength="4" value="'+ cvc +'" disabled/>' +
+                                    '<input type="text" name="cvs" maxlength="4" value="'+ cvc +'" disabled/>' +
                                 '</li>' +
                             '</ol>' +
                             '<ol style="list-style: none">' +
@@ -475,6 +476,7 @@ function createShipmentForm(){
     
     shipmentForm.innerHTML = '<ol style="list-style: none">'+
             '<li><label for="description">Description</label>'+
+                '<input type="hidden" name="user_address_id" value="'+ user_address_id+'"/>' +
                 '<input type="text" name="description" value="'+ description +'" disabled/>'+
             '</li>'+
             '<li><label for="name">Recipient Name:</label>'+
@@ -503,6 +505,23 @@ function createShipmentForm(){
     return shipmentForm;
 }
 
-function order(){
+function order(formObj){
     
+    var list = formObj.getElementsByTagName("INPUT");
+    var p = "";
+    for(var i in list){
+        //if(list[i].tagName == "BUTTON") continue;
+        p += list[i]['name'] + "="+ list[i]['value'] + "&";
+    }
+    alert(p);
+    rqst = getXMLHttpRequest();
+    rqst.onreadystatechange = function(){
+        if(this.readyState == 4){
+            alert(this.responseText);
+        }
+    }
+    rqst.open("POST", "checkout.php", true);
+    rqst.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+    rqst.send(p);
+    return false;
 }

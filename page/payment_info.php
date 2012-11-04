@@ -14,6 +14,7 @@
                 <a href="items.php"><img src="logo.jpg" /></a>
             </div>
             <div id="main">
+                <form id="order" name="order" method="POST" action="checkout.php">
                 <div id="payment_form">
                     <fieldset>
                         <legend>Payment Information</legend>
@@ -23,13 +24,12 @@
                     </fieldset>
                 </div>
                 <div id="shipping_info">
-
                     <fieldset>
                         <legend>Shipping Information</legend>
                         <select id="shipment_select" name="shipment_select">
                         </select>
                         <div id="shipTargetForm"></div>
-                    </fieldset>
+                    </feldset>
                 </div>
                 <div id="order_summary">
                     <fieldset>
@@ -52,6 +52,7 @@
                                     ?>
                                     <tr>
                                         <td><input type="hidden" name="item" value="<?php echo $item ?>"/><?php echo $item ?></td>
+                                        <td><input type="hidden" name="item_name" value="<?php echo $val['item_name'] ?>"/><?php echo $val['item_name'] ?></td>
                                         <td><input type="text" name="quantity" value="<?php echo $val['quantity'] ?>"
                                                    style="outline:none"/></td>
                                         <td><?php echo $val['price'] ?></td>
@@ -65,10 +66,11 @@
                             ?>
                         </table>
                     </fieldset>
-                    <span class='but'><a href='javascript:order();'>Place Order</a></span>
+                    <span class='but'><a href='javascript:order(document.getElementById("order"));return false;'>Place Order</a></span>
                 </div>
+                </form>
             </div> 
             <!--/form -->
         </div>
     </body>
-</html>
+</html>i
