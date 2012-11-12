@@ -23,7 +23,7 @@ ini_set('display_errors', 'On');
             $query = "select quantity from inventory where inventory_id = $inventory_id";
             $result = mysql_query($query) or die("Cannot get the data");
             $row = mysql_fetch_array($result);
-            if ($quantity >= $row['quantity']) {
+            if ($quantity > $row['quantity']) {
             }else {            
                 $_SESSION['cart'][$inventory_id]['quantity'] = $quantity;
             }
