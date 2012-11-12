@@ -1,7 +1,9 @@
 <?php
 session_start();
 ini_set('display_errors', 'On');
-
+include(dirname(__DIR__)."/model/OrderFileGenerator.php");
+$orderFileGenerator = new OrderFileGenerator();
+//error_log("error message");
 # checkout.php
 # Takes in items, payment, and shipping information, and create order table.
 //foreach($_REQUEST as $key => $val)
@@ -17,14 +19,7 @@ if(!isset($_REQUEST['credit_card_number']) ||
    !isset($_REQUEST['billing_city'])  ||
    !isset($_REQUEST['billing_zipcode']) 
         ){
-    echo '<html><head>
-<title>Your Page Title</title>
-<!--meta http-equiv="REFRESH" content="0;url=payment_info.php"></HEAD-->
-<body>
-Error - Input credit card is incorrect
-</body>
-</html>
-';
+    echo 'Error - Input credit card is incorrect';
     return false;
     
 }
@@ -54,13 +49,7 @@ if(!isset($_REQUEST['description']) ||
    !isset($_REQUEST['recipient_state'])  ||
    !isset($_REQUEST['recipient_city'])  ||
    !isset($_REQUEST['recipient_zipcode'])){
-    echo '<html><head>
-<title>Your Page Title</title>
-<!--meta http-equiv="REFRESH" content="0;url=payment_info.php"></HEAD-->
-<body> Error - input for shipping info is incorrect.
-</body>
-</html>
-';
+    echo 'Error - input for shipping info is incorrect.';
     return false;
 }
 
@@ -74,6 +63,11 @@ $recipient_state = $_REQUEST['recipient_state'];
 $recipient_city = $_REQUEST['recipient_city'];
 $recipient_zipcode = $_REQUEST['recipient_zipcode'];
 
+
+if(!isset($_SESSION['cart']) || $_SESSION['cart'] == null){
+    echo 'Error - no item is in the cart';
+    return false;
+}
 
 
 // TODO: input validation
@@ -158,7 +152,7 @@ if (isset($_SESSION['cart']) && $_SESSION['cart'] != null && isset($_SESSION['us
             }
         }
         
-        $result = mysql_query("insert into order_status (order_id, order_status, created_by) 
+        $result = mysql_query("insert into order_sstatus (order_id, order_status, created_by) 
                     values ($order_id, 'requested', '${_SESSION['username']}');");
         if(!$result){
             echo "Insertion fail(Order Status)  - ". mysql_error();
@@ -166,6 +160,9 @@ if (isset($_SESSION['cart']) && $_SESSION['cart'] != null && isset($_SESSION['us
             return;
         }
 
+        $array = array('users_userid'=> $userid,'order_id' => $order_id,
+            'credit_card_num'=> $credit_card_number, 'total_price'=> $totalPrice, 'order_date'=> '');
+        $orderFileGenerator->createOderFile($order_id, $array);
         unset($_SESSION['cart']);
         mysql_query("COMMIT;");
         echo "COMMIT";
@@ -174,10 +171,16 @@ if (isset($_SESSION['cart']) && $_SESSION['cart'] != null && isset($_SESSION['us
         echo "ROLLBACK";
         mysql_query("ROLLBACK");
     } catch(mysqli_sql_exception $e1){
+        echo $e;
         echo "ROLLBACK";
         mysql_query("ROLLBACK");
     }
     mysql_close($dblink);
+    
+    /*echo '<html><head>
+<title>Your Page Title</title>
+<meta http-equiv="REFRESH" content="0;url=http://${_SERVER["SERVER_NAME"]}/page/checkout_result.php?order_id=<?php echo $order_id; ?>">
+</head><body></body></html>';*/
     echo "done";
 }
 ?>

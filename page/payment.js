@@ -513,7 +513,7 @@ function order(formObj){
         //if(list[i].tagName == "BUTTON") continue;
         p += list[i]['name'] + "="+ list[i]['value'] + "&";
     }
-    alert(p);
+    //alert(p);
     rqst = getXMLHttpRequest();
     rqst.onreadystatechange = function(){
         if(this.readyState == 4){

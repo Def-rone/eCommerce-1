@@ -14,7 +14,7 @@ if(isset($_SESSION['cart']) && $_SESSION['cart'] != null){
         $query = "INSERT INTO SHOPPING_CART(inventory_id, customer_username, items_id, quantity) values 
                 (${key}, '${_SESSION['username']}',  ${record['item']}, ${record['quantity']});";
         mysql_query($query);
-echo "$query";
+        echo "$query";
         }
         mysql_close($dblink);
 }

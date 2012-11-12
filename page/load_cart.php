@@ -28,7 +28,7 @@ if(isset($_SESSION['username']) && $_SESSION['username'] != null){
         if(!isset($_SESSION['cart'])){ //if shopping cart does not exist, create array and assign to 'cart' variable.
             $_SESSION['cart'] = array($inventory_id => $item_record);
         }else{
-            echo "add to session";
+            //echo "add to session";
         #TODO: need to add logic to check if there's same item in the shopping cart. If so increase the quantity.
             $_SESSION['cart'][$inventory_id] = $item_record;
         }
